@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#4FB9E8">
+  <title>abby 工作台 🌊</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Press+Start+2P&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+<script src="https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js"></script>
+<script>
+(function(){
+  try{
+    var beacon=new BeaconAction({
+      appkey:'0WEB06U85YBSLJNL',
+      versionCode:'1.0.0',
+      channelID:'share',
+      delay:1000,
+      sessionDuration:30*60*1000,
+      isOversea:false,
+      needReportRqdEvent:false
+    });
+    beacon.onDirectUserAction('preview_page_view',{
+      'url':location.href,
+      'referrer':document.referrer,
+      'title':document.title,
+      'sandbox_id':'00f9b399fd9848848daf28d20f5e65a0'
+    });
+  }catch(e){}
+})();
+</script></head>
+<body>
+
+<!-- ========== 开屏动画 ========== -->
+<div id="splash">
+  <canvas id="splashCanvas"></canvas>
+  <div class="splash-content">
+    <div class="splash-greeting">Hi ~</div>
+    <div class="splash-name">abby</div>
+    <div class="splash-date" id="splashDate"></div>
+  </div>
+  <div class="splash-hint">🐟 loading...</div>
+</div>
+
+<!-- ========== 主应用 ========== -->
+<div id="app">
+  <!-- 海洋场景背景 -->
+  <div class="ocean-scene" id="oceanScene">
+    <div class="ocean-layer-far" id="oceanLayerFar"></div>
+    <div class="ocean-layer-mid" id="oceanLayerMid"></div>
+    <div class="ocean-layer-near" id="oceanLayerNear"></div>
+  </div>
+  <div class="sun-rays"></div>
+
+  <!-- 侧边栏 -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-avatar">🤿</div>
+      <div class="sidebar-name">abby</div>
+      <div class="sidebar-title">深海探索者</div>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-item active" data-page="home">
+        <span class="nav-icon">🏠</span><span>首页</span>
+      </div>
+      <div class="nav-item" data-page="weather">
+        <span class="nav-icon">🌤️</span><span>天气</span>
+      </div>
+      <div class="nav-item" data-page="todo">
+        <span class="nav-icon">📋</span><span>待办</span>
+        <span class="nav-badge hidden" id="todoBadge">0</span>
+      </div>
+      <div class="nav-item" data-page="calendar">
+        <span class="nav-icon">📅</span><span>日历</span>
+      </div>
+      <div class="nav-item" data-page="finance">
+        <span class="nav-icon">💰</span><span>记账</span>
+      </div>
+      <div class="nav-item" data-page="pomodoro">
+        <span class="nav-icon">🍅</span><span>番茄钟</span>
+      </div>
+      <div class="nav-item" data-page="checkin">
+        <span class="nav-icon">🔥</span><span>打卡图鉴</span>
+      </div>
+      <div class="nav-item" data-page="settings">
+        <span class="nav-icon">⚙️</span><span>设置</span>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div>v1.0.0 🌊</div>
+      <div style="margin-top:4px;">Keep diving, abby!</div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- 主内容 -->
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <div>
+        <div class="topbar-title" id="pageTitle">首页</div>
+        <div class="topbar-subtitle" id="pageSubtitle">今日工作台</div>
+      </div>
+    </header>
+
+    <div class="content" id="content">
+      <!-- 首页 -->
+      <div class="page active" id="page-home"></div>
+      <!-- 天气 -->
+      <div class="page" id="page-weather"></div>
+      <!-- 待办 -->
+      <div class="page" id="page-todo"></div>
+      <!-- 日历 -->
+      <div class="page" id="page-calendar"></div>
+      <!-- 记账 -->
+      <div class="page" id="page-finance"></div>
+      <!-- 番茄钟 -->
+      <div class="page" id="page-pomodoro"></div>
+      <!-- 打卡图鉴 -->
+      <div class="page" id="page-checkin"></div>
+      <!-- 设置 -->
+      <div class="page" id="page-settings"></div>
+    </div>
+  </main>
+</div>
+
+<!-- 模态弹窗容器 -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- 闪卡解锁动画 -->
+<div class="flash-unlock-overlay" id="flashUnlockOverlay">
+  <div class="flash-unlock-card" id="flashUnlockCard"></div>
+</div>
+
+<script src="assets/js/store.js?v=5"></script>
+<script src="assets/js/splash.js?v=5"></script>
+<script src="assets/js/weather.js?v=5"></script>
+<script src="assets/js/checkin.js?v=5"></script>
+<script src="assets/js/todo.js?v=5"></script>
+<script src="assets/js/finance.js?v=5"></script>
+<script src="assets/js/calendar.js?v=5"></script>
+<script src="assets/js/pomodoro.js?v=5"></script>
+<script src="assets/js/home.js?v=5"></script>
+<script src="assets/js/app.js?v=5"></script>
+</body>
+</html>
