@@ -13,6 +13,17 @@ const Weather = {
   lastError: null,
   useMock: false,
 
+  // 带超时的 fetch（8秒），避免 API 卡住导致页面白屏
+  async fetchWithTimeout(url, options = {}, timeout = 8000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
+  },
+
   // Mock 天气数据（Key未配置或网络失败时使用）
   getMockData() {
     const today = Store.today();
@@ -55,15 +66,15 @@ const Weather = {
       const headers = { 'X-QW-Api-Key': this.key };
 
       // 实时天气
-      const res = await fetch(`${base}/v7/weather/now?location=${this.locationId}`, { headers });
+      const res = await this.fetchWithTimeout(`${base}/v7/weather/now?location=${this.locationId}`, { headers });
       const data = await res.json();
 
       // 3天预报
-      const fres = await fetch(`${base}/v7/weather/3d?location=${this.locationId}`, { headers });
+      const fres = await this.fetchWithTimeout(`${base}/v7/weather/3d?location=${this.locationId}`, { headers });
       const fdata = await fres.json();
 
       // 生活指数（穿衣）
-      const ires = await fetch(`${base}/v7/indices/3d?location=${this.locationId}&type=3,5`, { headers });
+      const ires = await this.fetchWithTimeout(`${base}/v7/indices/3d?location=${this.locationId}&type=3,5`, { headers });
       const idata = await ires.json();
 
       if (data.code === '200') {

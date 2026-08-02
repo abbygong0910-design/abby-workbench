@@ -3,7 +3,7 @@
  */
 
 const Home = {
-  async render() {
+  render() {
     const el = document.getElementById('page-home');
     const today = Store.today();
     const tasks = Checkin.getTasks();
@@ -12,8 +12,16 @@ const Home = {
     const pendingTodos = Todo.getPendingCount();
     const financeStats = Finance.monthStats();
 
-    // 天气卡片
-    const weatherCard = await Weather.renderHomeCard();
+    // 天气卡片（不阻塞首页渲染，先占位，异步加载后替换）
+    let weatherCard = `<div class="card" id="weatherSlot">
+      <div class="flex-between">
+        <div>
+          <div style="font-size:12px;color:var(--text-muted)">天气加载中</div>
+          <div style="font-size:14px;color:var(--text-secondary)">🌊 ...</div>
+        </div>
+        <div style="font-size:32px;">⏳</div>
+      </div>
+    </div>`;
 
     // 打卡卡片
     const checkinCards = tasks.map(task => {
@@ -105,5 +113,19 @@ const Home = {
         </div>
       </div>
     `;
+
+    // 异步加载天气卡片（不阻塞首页）
+    this.loadWeatherAsync();
+  },
+
+  // 异步拉取天气并替换占位卡片
+  async loadWeatherAsync() {
+    try {
+      const card = await Weather.renderHomeCard();
+      const slot = document.getElementById('weatherSlot');
+      if (slot) slot.outerHTML = card;
+    } catch(e) {
+      console.error('天气加载失败:', e);
+    }
   }
 };
