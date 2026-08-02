@@ -47,8 +47,8 @@ const Home = {
     el.innerHTML = `
       <!-- 顶部欢迎 -->
       <div class="card" style="background:linear-gradient(135deg,rgba(255,107,53,0.12),rgba(27,231,255,0.08));">
-        <div style="font-size:14px;color:var(--text-secondary);">${Store.greeting()}</div>
-        <div style="font-size:24px;font-weight:900;color:var(--text-primary);margin-top:4px;">Hi abby 👋</div>
+        <div style="font-size:18px;font-weight:900;color:#FFF3D6;text-shadow:0 2px 8px rgba(0,30,60,0.85),0 0 2px rgba(0,30,60,0.6);">${Store.greeting()}</div>
+        <div style="font-size:24px;font-weight:900;color:var(--text-primary);margin-top:4px;text-shadow:0 2px 8px rgba(0,30,60,0.6);">Hi abby 👋</div>
         <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">${Store.formatDate(new Date())}</div>
       </div>
 

@@ -614,6 +614,11 @@ label {
   margin-bottom: 8px;
 }
 
+.flash-card-emoji canvas {
+  display: block;
+  margin: 0 auto;
+}
+
 .flash-card-name {
   font-size: 15px;
   font-weight: 800;
@@ -698,6 +703,11 @@ label {
   font-size: 88px;
   margin-bottom: 12px;
   animation: bounce 1s ease infinite;
+}
+
+.flash-unlock-emoji canvas {
+  display: block;
+  margin: 0 auto;
 }
 
 @keyframes bounce {
@@ -1069,7 +1079,7 @@ label {
 .pixel-fish::before {
   content: '';
   position: absolute;
-  right: -6px;
+  left: -6px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;

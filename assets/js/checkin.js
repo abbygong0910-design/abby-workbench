@@ -275,6 +275,25 @@ const Checkin = {
       `;
     }).join('');
 
+    // 番茄钟专注图鉴
+    let pomoHtml = '';
+    if (typeof PomoFish !== 'undefined') {
+      const pomoTotal = PomoFish.getTotalMinutes();
+      const pomoUnlocked = PomoFish.getUnlocked();
+      const pomoCollectionHtml = PomoFish.collection.map(fish => {
+        const uInfo = pomoUnlocked.find(u => u.id === fish.id);
+        return PomoFish.fishCardHTML(fish, false, uInfo);
+      }).join('');
+
+      pomoHtml = `
+        <div class="card-title mt-24 mb-16"><span class="card-icon">🍅</span>专注图鉴</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">累计专注 ${pomoTotal} 分钟 · 已收集 ${pomoUnlocked.length} / ${PomoFish.collection.length} 种</div>
+        <div class="grid-3" style="gap:10px;">
+          ${pomoCollectionHtml}
+        </div>
+      `;
+    }
+
     el.innerHTML = `
       <div class="card text-center" style="background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(27,231,255,0.1));">
         <div style="font-size:48px;">🔥</div>
@@ -296,6 +315,8 @@ const Checkin = {
       <div class="grid-3" style="gap:10px;">
         ${collectionHtml}
       </div>
+
+      ${pomoHtml}
     `;
   },
 

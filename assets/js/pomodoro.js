@@ -133,6 +133,45 @@ const Pomodoro = {
     // 触发打卡（自动打卡到番茄钟任务）
     this.autoCheckin(record);
 
+    // 检查番茄钟专注图鉴解锁
+    if (typeof PomoFish !== 'undefined') {
+      const newFishes = PomoFish.checkUnlocks();
+      if (newFishes.length > 0) {
+        setTimeout(() => {
+          const cardEl = document.getElementById('flashUnlockCard');
+          const overlay = document.getElementById('flashUnlockOverlay');
+          // 展示番茄鱼解锁闪卡
+          let idx = 0;
+          const showNextPomo = () => {
+            if (idx >= newFishes.length) {
+              overlay.classList.remove('show');
+              setTimeout(() => overlay.style.display = 'none', 300);
+              return;
+            }
+            const f = newFishes[idx];
+            const canvas = PomoFish.renderFishCanvas(f, 220, 12);
+            const fishHtml = canvas ? canvas.outerHTML : '🐟';
+            cardEl.innerHTML = `
+              <div class="flash-unlock-shine"></div>
+              <div class="flash-unlock-title">NEW DISCOVERY</div>
+              <div class="flash-unlock-emoji">${fishHtml}</div>
+              <div class="flash-unlock-name">${f.name}</div>
+              <div class="flash-unlock-desc">${f.desc}</div>
+              <div class="flash-card-rarity" style="background:${Checkin.rarityColor(f.rarity)};color:#052230;margin-top:16px;">
+                ${Checkin.rarityText(f.rarity)} ★
+              </div>
+              <button class="btn btn-primary mt-24" onclick="window.pomoFlashNext&&window.pomoFlashNext()">收下</button>
+            `;
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('show'), 50);
+            idx++;
+          };
+          window.pomoFlashNext = showNextPomo;
+          showNextPomo();
+        }, 800);
+      }
+    }
+
     // 播放完成动画
     this.renderComplete(record);
   },
