@@ -1140,3 +1140,103 @@ label {
     radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 35%),
     radial-gradient(ellipse at 80% 0%, rgba(255,255,255,0.1) 0%, transparent 45%);
 }
+
+/* ---------- 卡片查看层（点击放大 + 鼠标跟随旋转）---------- */
+.card-view-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 20, 40, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  cursor: pointer;
+}
+
+.card-view-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card-view-content {
+  position: relative;
+  width: min(480px, 90vw);
+  perspective: 1000px;
+}
+
+.card-view-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.card-view-close:hover { background: rgba(255,255,255,0.3); }
+
+.card-view-stage {
+  perspective: 1000px;
+  cursor: grab;
+}
+
+.card-view-card {
+  transform-style: preserve-3d;
+  transition: transform 0.05s linear;
+  will-change: transform;
+  background: rgba(10, 30, 55, 0.9);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.card-view-card img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  pointer-events: none;
+}
+
+.card-view-emoji {
+  font-size: 120px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.card-view-info {
+  text-align: center;
+  padding: 12px 0 4px;
+}
+
+.card-view-name {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.card-view-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.card-view-rarity {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+}

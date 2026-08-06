@@ -166,6 +166,103 @@ const Checkin = {
     this._showNext();
   },
 
+  // 临时测试功能：解锁所有图鉴（项目完成后删除）
+  unlockAllForPreview() {
+    // 解锁所有海洋生物
+    const allFish = this.fishCollection.map(f => ({ id: f.id, unlockDate: Store.today() }));
+    Store.set('unlocked_fish', allFish);
+    // 解锁所有番茄鱼
+    if (typeof PomoFish !== 'undefined') {
+      const allPomo = PomoFish.collection.map(f => ({ id: f.id, unlockDate: Store.today() }));
+      Store.set(PomoFish.storeKey, allPomo);
+    }
+    UI.toast('已解锁全部图鉴（测试预览）🔓');
+    this.renderPage();
+  },
+
+  // 点击图鉴卡片放大查看（跟随鼠标旋转）
+  viewCard(fishId) {
+    const fish = this.fishCollection.find(f => f.id === fishId);
+    if (!fish) return;
+    const unlocked = Store.get('unlocked_fish', []);
+    if (!unlocked.find(u => u.id === fishId)) return;
+
+    // 关闭现有查看层
+    this.closeCardView();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'cardViewOverlay';
+    overlay.className = 'card-view-overlay';
+
+    const content = document.createElement('div');
+    content.className = 'card-view-content';
+
+    const isPomoFish = fish.img && fish.img.startsWith('assets/img/fish');
+    const imageHtml = fish.img
+      ? `<img src="${fish.img}" alt="${fish.name}">`
+      : `<div class="card-view-emoji">${fish.emoji}</div>`;
+
+    content.innerHTML = `
+      <button class="card-view-close" onclick="Checkin.closeCardView()">×</button>
+      <div class="card-view-stage">
+        <div class="card-view-card">
+          ${imageHtml}
+          <div class="card-view-info">
+            <div class="card-view-name">${fish.name}</div>
+            <div class="card-view-desc">${fish.desc}</div>
+            <div class="card-view-rarity" style="background:${this.rarityColor(fish.rarity)};color:#052230;">
+              ${this.rarityText(fish.rarity)} ★
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    overlay.appendChild(content);
+    document.body.appendChild(overlay);
+    // 触发动画
+    requestAnimationFrame(() => overlay.classList.add('show'));
+
+    // 鼠标跟随旋转
+    const stage = content.querySelector('.card-view-stage');
+    const card = content.querySelector('.card-view-card');
+    let raf = null;
+    let targetRX = 0, targetRY = 0, currentRX = 0, currentRY = 0;
+
+    overlay.addEventListener('mousemove', (e) => {
+      const rect = overlay.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;   // 0~1
+      const y = (e.clientY - rect.top) / rect.height;   // 0~1
+      targetRY = (x - 0.5) * 24;   // 左右旋转 ±12°
+      targetRX = (0.5 - y) * 20;   // 上下旋转 ±10°
+      if (!raf) raf = requestAnimationFrame(animate);
+    });
+
+    function animate() {
+      currentRX += (targetRX - currentRX) * 0.12;
+      currentRY += (targetRY - currentRY) * 0.12;
+      card.style.transform = `rotateX(${currentRX}deg) rotateY(${currentRY}deg)`;
+      raf = null;
+      if (Math.abs(targetRX - currentRX) > 0.05 || Math.abs(targetRY - currentRY) > 0.05) {
+        raf = requestAnimationFrame(animate);
+      }
+    }
+
+    // 点击遮罩关闭
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) this.closeCardView();
+    });
+  },
+
+  // 关闭卡片查看层
+  closeCardView() {
+    const overlay = document.getElementById('cardViewOverlay');
+    if (overlay) {
+      overlay.classList.remove('show');
+      setTimeout(() => overlay.remove(), 250);
+    }
+  },
+
   // 完成打卡
   doCheckin(taskId, formData) {
     const task = this.getTasks().find(t => t.id === taskId);
@@ -268,8 +365,10 @@ const Checkin = {
             ? `<img src="${fish.img}" alt="${fish.name}" style="width:100%;border-radius:12px;display:block;image-rendering:auto;">`
             : `<div class="flash-card-emoji" style="font-size:40px;">❓</div>`)
         : `<div class="flash-card-emoji" style="font-size:40px;">${isUnlocked ? fish.emoji : '❓'}</div>`;
+      const clickAttr = isUnlocked ? `onclick="Checkin.viewCard('${fish.id}')"` : '';
+      const cursorStyle = isUnlocked ? 'cursor:pointer;' : '';
       return `
-        <div class="flash-card ${fish.rarity} ${!isUnlocked ? 'locked' : ''}" style="padding:16px;">
+        <div class="flash-card ${fish.rarity} ${!isUnlocked ? 'locked' : ''}" style="padding:16px;${cursorStyle}" ${clickAttr}>
           <div style="font-size:0;margin-bottom:8px;">${displayHtml}</div>
           <div class="flash-card-name" style="font-size:14px;">${isUnlocked ? fish.name : '???'}</div>
           ${isUnlocked ? `<div class="flash-card-desc" style="font-size:11px;">${fish.desc}</div>` :
@@ -312,7 +411,10 @@ const Checkin = {
 
       <div class="flex-between mb-16">
         <div class="card-title" style="margin:0"><span class="card-icon">📋</span>今日打卡</div>
-        <button class="btn btn-secondary btn-sm" onclick="Checkin.openAddTask()">+ 添加</button>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-secondary btn-sm" onclick="Checkin.unlockAllForPreview()">🔍 预览全部</button>
+          <button class="btn btn-secondary btn-sm" onclick="Checkin.openAddTask()">+ 添加</button>
+        </div>
       </div>
 
       ${tasksHtml || '<div class="empty-state"><div class="empty-state-icon">📋</div>暂无打卡任务，点击右上角添加</div>'}
