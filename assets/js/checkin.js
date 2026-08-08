@@ -15,6 +15,8 @@ const Checkin = {
     { id:'f06', emoji:'🐟', name:'比目鱼', desc:'左右不对称的伪装大师', img:'assets/img/fish/flounder.png', cutout:'assets/img/fish-cutout/flounder.png', cutoutThumb:'assets/img/fish-cutout/thumb/flounder.png', cutoutType:'transparent', rarity:'common', unlockAt:12 },
     { id:'f07', emoji:'🐟', name:'海鲈鱼', desc:'近海常见的勇猛猎手', img:'assets/img/fish/bass.png', cutout:'assets/img/fish-cutout/bass.png', cutoutThumb:'assets/img/fish-cutout/thumb/bass.png', cutoutType:'transparent', rarity:'common', unlockAt:15 },
     { id:'f08', emoji:'🐟', name:'黑鲷', desc:'礁石区的黑色贵客', img:'assets/img/fish/black_seabream.png', cutout:'assets/img/fish-cutout/black_seabream.png', cutoutThumb:'assets/img/fish-cutout/thumb/black_seabream.png', cutoutType:'transparent', rarity:'common', unlockAt:18 },
+    { id:'f28', emoji:'🐟', name:'红鲈', desc:'赤红身影的浅海猎手', img:'assets/img/fish/rockfish.png', cutout:'assets/img/fish-cutout/rockfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/rockfish.png', cutoutType:'transparent', rarity:'common', unlockAt:2 },
+    { id:'f29', emoji:'🐟', name:'黄尾笛鲷', desc:'尾巴金黄的热带鱼', img:'assets/img/fish/yellowtail_snapper.png', cutout:'assets/img/fish-cutout/yellowtail_snapper.png', cutoutThumb:'assets/img/fish-cutout/thumb/yellowtail_snapper.png', cutoutType:'transparent', rarity:'common', unlockAt:4 },
     // 稀有
     { id:'f09', emoji:'🦈', name:'锤头鲨', desc:'头部形似锤子的凶猛猎手', img:'assets/img/fish/hammerhead.png', cutout:'assets/img/fish-cutout/hammerhead.png', cutoutThumb:'assets/img/fish-cutout/thumb/hammerhead.png', cutoutType:'transparent', rarity:'rare', unlockAt:7 },
     { id:'f10', emoji:'🐎', name:'海马', desc:'直立游动的海洋小精灵', img:'assets/img/fish/seahorse.png', cutout:'assets/img/fish-cutout/seahorse.png', cutoutThumb:'assets/img/fish-cutout/thumb/seahorse.png', cutoutType:'transparent', rarity:'rare', unlockAt:14 },
@@ -23,24 +25,21 @@ const Checkin = {
     { id:'f13', emoji:'👑', name:'皇帝神仙鱼', desc:'色彩尊贵的珊瑚贵族', img:'assets/img/fish/emperor_angelfish.png', cutout:'assets/img/fish-cutout/emperor_angelfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/emperor_angelfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:30 },
     { id:'f14', emoji:'🐟', name:'蓝马林鱼', desc:'热带海域的蓝色闪电', img:'assets/img/fish/blue_marlin.png', cutout:'assets/img/fish-cutout/blue_marlin.png', cutoutThumb:'assets/img/fish-cutout/thumb/blue_marlin.png', cutoutType:'transparent', rarity:'rare', unlockAt:35 },
     { id:'f15', emoji:'🐡', name:'蓑鲉', desc:'身披棘刺的海洋舞者', img:'assets/img/fish/lionfish.png', cutout:'assets/img/fish-cutout/lionfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/lionfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:40 },
+    { id:'f30', emoji:'🦜', name:'鹦鹉鱼', desc:'长着喙状嘴的珊瑚雕刻师', img:'assets/img/fish/parrotfish.png', cutout:'assets/img/fish-cutout/parrotfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/parrotfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:20 },
     // 史诗
     { id:'f16', emoji:'🐳', name:'蓝鲸', desc:'海洋中最大的生命', rarity:'epic', unlockAt:14 },
     { id:'f17', emoji:'🦈', name:'大白鲨', desc:'海洋顶级掠食者', rarity:'epic', unlockAt:30 },
     { id:'f18', emoji:'🐋', name:'座头鲸', desc:'会唱歌的温柔巨兽', rarity:'epic', unlockAt:45 },
     { id:'f19', emoji:'🦭', name:'虎鲸', desc:'海洋中的黑色猎手', rarity:'epic', unlockAt:60 },
     { id:'f20', emoji:'🐙', name:'深海巨型章鱼', desc:'北欧传说中的克拉肯', rarity:'epic', unlockAt:75 },
+    { id:'f27', emoji:'🌟', name:'海之灵', desc:'海洋之心的守护精灵', rarity:'epic', unlockAt:50 },
     // 传说
     { id:'f21', emoji:'🐉', name:'海龙', desc:'传说中的海洋守护者', rarity:'legendary', unlockAt:30 },
     { id:'f22', emoji:'🧜‍♀️', name:'人鱼', desc:'深海中的神秘歌者', rarity:'legendary', unlockAt:50 },
     { id:'f23', emoji:'🐊', name:'海洋鳄神', desc:'远古时代的活化石', rarity:'legendary', unlockAt:80 },
     { id:'f24', emoji:'🐍', name:'海蛇皇', desc:'盘踞深海的神秘力量', rarity:'legendary', unlockAt:100 },
     { id:'f25', emoji:'🐲', name:'利维坦', desc:'圣经中的深海巨兽', rarity:'legendary', unlockAt:120 },
-    // 特殊（彩蛋）
     { id:'f26', emoji:'🧜‍♂️', name:'波塞冬', desc:'海洋之主，掌控潮汐', rarity:'legendary', unlockAt:150 },
-    { id:'f27', emoji:'🌟', name:'海之灵', desc:'海洋之心的守护精灵', rarity:'epic', unlockAt:50 },
-    { id:'f28', emoji:'🐟', name:'红鲈', desc:'赤红身影的浅海猎手', img:'assets/img/fish/rockfish.png', cutout:'assets/img/fish-cutout/rockfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/rockfish.png', cutoutType:'transparent', rarity:'common', unlockAt:2 },
-    { id:'f29', emoji:'🐟', name:'黄尾笛鲷', desc:'尾巴金黄的热带鱼', img:'assets/img/fish/yellowtail_snapper.png', cutout:'assets/img/fish-cutout/yellowtail_snapper.png', cutoutThumb:'assets/img/fish-cutout/thumb/yellowtail_snapper.png', cutoutType:'transparent', rarity:'common', unlockAt:4 },
-    { id:'f30', emoji:'🦜', name:'鹦鹉鱼', desc:'长着喙状嘴的珊瑚雕刻师', img:'assets/img/fish/parrotfish.png', cutout:'assets/img/fish-cutout/parrotfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/parrotfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:20 },
   ],
 
   rarityText(r) {
