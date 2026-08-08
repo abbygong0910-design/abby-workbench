@@ -16,13 +16,13 @@ const Checkin = {
     { id:'f07', emoji:'🐟', name:'海鲈鱼', desc:'近海常见的勇猛猎手', img:'assets/img/fish/bass.png', cutout:'assets/img/fish-cutout/bass.png', cutoutThumb:'assets/img/fish-cutout/thumb/bass.png', cutoutType:'transparent', rarity:'common', unlockAt:15 },
     { id:'f08', emoji:'🐟', name:'黑鲷', desc:'礁石区的黑色贵客', img:'assets/img/fish/black_seabream.png', cutout:'assets/img/fish-cutout/black_seabream.png', cutoutThumb:'assets/img/fish-cutout/thumb/black_seabream.png', cutoutType:'transparent', rarity:'common', unlockAt:18 },
     // 稀有
-    { id:'f09', emoji:'🐬', name:'海豚', desc:'海洋中最友善的伙伴', rarity:'rare', unlockAt:7 },
-    { id:'f10', emoji:'🦭', name:'海豹', desc:'憨态可掬的潜水高手', rarity:'rare', unlockAt:14 },
-    { id:'f11', emoji:'🦈', name:'礁鲨', desc:'优雅的海洋猎手', rarity:'rare', unlockAt:21 },
-    { id:'f12', emoji:'🐠', name:'蓝鳍金枪鱼', desc:'游泳健将，速度惊人', rarity:'rare', unlockAt:25 },
-    { id:'f13', emoji:'🦑', name:'大王乌贼', desc:'深海中的神秘巨影', rarity:'rare', unlockAt:30 },
-    { id:'f14', emoji:'🐌', name:'海蛞蝓', desc:'色彩斑斓的海底宝石', rarity:'rare', unlockAt:35 },
-    { id:'f15', emoji:'🦞', name:'龙虾', desc:'岩缝中的红色甲胄武士', rarity:'rare', unlockAt:40 },
+    { id:'f09', emoji:'🦈', name:'锤头鲨', desc:'头部形似锤子的凶猛猎手', img:'assets/img/fish/hammerhead.png', cutout:'assets/img/fish-cutout/hammerhead.png', cutoutThumb:'assets/img/fish-cutout/thumb/hammerhead.png', cutoutType:'transparent', rarity:'rare', unlockAt:7 },
+    { id:'f10', emoji:'🐎', name:'海马', desc:'直立游动的海洋小精灵', img:'assets/img/fish/seahorse.png', cutout:'assets/img/fish-cutout/seahorse.png', cutoutThumb:'assets/img/fish-cutout/thumb/seahorse.png', cutoutType:'transparent', rarity:'rare', unlockAt:14 },
+    { id:'f11', emoji:'🦋', name:'蝴蝶鱼', desc:'色彩斑斓的珊瑚舞者', img:'assets/img/fish/butterflyfish.png', cutout:'assets/img/fish-cutout/butterflyfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/butterflyfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:21 },
+    { id:'f12', emoji:'🐍', name:'皇带鱼', desc:'深海中的银色巨带', img:'assets/img/fish/oarfish.png', cutout:'assets/img/fish-cutout/oarfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/oarfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:25 },
+    { id:'f13', emoji:'👑', name:'皇帝神仙鱼', desc:'色彩尊贵的珊瑚贵族', img:'assets/img/fish/emperor_angelfish.png', cutout:'assets/img/fish-cutout/emperor_angelfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/emperor_angelfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:30 },
+    { id:'f14', emoji:'🐟', name:'蓝马林鱼', desc:'热带海域的蓝色闪电', img:'assets/img/fish/blue_marlin.png', cutout:'assets/img/fish-cutout/blue_marlin.png', cutoutThumb:'assets/img/fish-cutout/thumb/blue_marlin.png', cutoutType:'transparent', rarity:'rare', unlockAt:35 },
+    { id:'f15', emoji:'🐡', name:'蓑鲉', desc:'身披棘刺的海洋舞者', img:'assets/img/fish/lionfish.png', cutout:'assets/img/fish-cutout/lionfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/lionfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:40 },
     // 史诗
     { id:'f16', emoji:'🐳', name:'蓝鲸', desc:'海洋中最大的生命', rarity:'epic', unlockAt:14 },
     { id:'f17', emoji:'🦈', name:'大白鲨', desc:'海洋顶级掠食者', rarity:'epic', unlockAt:30 },
@@ -40,7 +40,7 @@ const Checkin = {
     { id:'f27', emoji:'🌟', name:'海之灵', desc:'海洋之心的守护精灵', rarity:'epic', unlockAt:50 },
     { id:'f28', emoji:'🐟', name:'红鲈', desc:'赤红身影的浅海猎手', img:'assets/img/fish/rockfish.png', cutout:'assets/img/fish-cutout/rockfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/rockfish.png', cutoutType:'transparent', rarity:'common', unlockAt:2 },
     { id:'f29', emoji:'🐟', name:'黄尾笛鲷', desc:'尾巴金黄的热带鱼', img:'assets/img/fish/yellowtail_snapper.png', cutout:'assets/img/fish-cutout/yellowtail_snapper.png', cutoutThumb:'assets/img/fish-cutout/thumb/yellowtail_snapper.png', cutoutType:'transparent', rarity:'common', unlockAt:4 },
-    { id:'f30', emoji:'🔮', name:'深海珍珠', desc:'月光凝结的结晶', rarity:'rare', unlockAt:20 },
+    { id:'f30', emoji:'🦜', name:'鹦鹉鱼', desc:'长着喙状嘴的珊瑚雕刻师', img:'assets/img/fish/parrotfish.png', cutout:'assets/img/fish-cutout/parrotfish.png', cutoutThumb:'assets/img/fish-cutout/thumb/parrotfish.png', cutoutType:'transparent', rarity:'rare', unlockAt:20 },
   ],
 
   rarityText(r) {
